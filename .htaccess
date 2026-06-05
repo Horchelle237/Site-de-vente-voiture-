@@ -1,0 +1,10 @@
+# Si on accède au projet sans /public/, on redirige automatiquement
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Bloque l'accès direct aux dossiers app/, sql/, docs/
+<FilesMatch "\.(sql|md|log)$">
+    Require all denied
+</FilesMatch>

@@ -1,0 +1,33 @@
+# =====================================================
+#  Réécriture d'URL pour le front controller (Apache)
+# =====================================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Préserve la base : si le projet est dans htdocs/euro-auto/public
+    # RewriteBase est calculé automatiquement la plupart du temps.
+
+    # Si le fichier ou le dossier demandé existe, on le sert directement
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Sinon, on route vers index.php avec ?url=...
+    RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+</IfModule>
+
+# Sécurité : empêcher l'affichage du contenu des dossiers
+Options -Indexes
+
+# Force UTF-8
+AddDefaultCharset UTF-8
+
+# Cache des assets statiques (1 mois)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png  "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType text/css   "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>

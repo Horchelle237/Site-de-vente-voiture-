@@ -1,0 +1,1506 @@
+/* ============================================================
+   EUROAUTO - Feuille de style principale
+   Thème : Luxe automobile (sombre + accents or)
+   ============================================================ */
+
+/* ---------- 1. Variables globales ---------- */
+:root {
+    --eu-bg-deep:        #0a0e15;
+    --eu-bg-dark:        #111827;
+    --eu-bg-card:        #1a2030;
+    --eu-bg-elevated:    #232a3d;
+    --eu-text:           #e8eaf0;
+    --eu-text-muted:     #9aa3b8;
+    --eu-text-dim:       #6b7388;
+    --eu-gold:           #f5b942;
+    --eu-gold-bright:    #fbbf24;
+    --eu-gold-deep:      #d97706;
+    --eu-accent:         #ef4444;
+    --eu-success:        #10b981;
+    --eu-border:         rgba(255, 255, 255, 0.08);
+    --eu-border-strong:  rgba(245, 185, 66, 0.25);
+    --eu-shadow-lg:      0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    --eu-shadow-gold:    0 8px 32px -8px rgba(245, 185, 66, 0.4);
+
+    --font-display:      'Playfair Display', 'Georgia', serif;
+    --font-body:         'Manrope', system-ui, -apple-system, sans-serif;
+}
+
+/* ---------- 2. Reset & base ---------- */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--eu-bg-deep);
+    color: var(--eu-text);
+    margin: 0;
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--eu-text);
+}
+
+a {
+    color: var(--eu-text-muted);
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+a:hover { color: var(--eu-gold-bright); }
+
+::selection {
+    background: var(--eu-gold);
+    color: var(--eu-bg-deep);
+}
+
+/* ---------- 3. Navbar ---------- */
+.euroauto-navbar {
+    background: rgba(10, 14, 21, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--eu-border);
+    padding: 0.85rem 0;
+    transition: padding 0.3s ease, background 0.3s ease;
+}
+.euroauto-navbar.scrolled {
+    padding: 0.55rem 0;
+    background: rgba(10, 14, 21, 0.96);
+}
+
+.brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--eu-gold) 0%, var(--eu-gold-deep) 100%);
+    color: var(--eu-bg-deep);
+    font-size: 1.1rem;
+    box-shadow: 0 4px 20px rgba(245, 185, 66, 0.35);
+}
+.brand-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--eu-text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem !important;
+    position: relative;
+    transition: color 0.25s;
+}
+.navbar-dark .navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 1rem; right: 1rem; bottom: 0.35rem;
+    height: 2px;
+    background: var(--eu-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--eu-text);
+}
+.navbar-dark .navbar-nav .nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* ---------- 4. Boutons ---------- */
+.btn {
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    letter-spacing: 0.01em;
+}
+.btn-warning {
+    background: linear-gradient(135deg, var(--eu-gold-bright) 0%, var(--eu-gold-deep) 100%);
+    border: none;
+    color: var(--eu-bg-deep);
+    box-shadow: 0 4px 14px rgba(245, 185, 66, 0.35);
+}
+.btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(245, 185, 66, 0.5);
+    color: var(--eu-bg-deep);
+}
+.btn-outline-warning {
+    border: 2px solid var(--eu-gold);
+    color: var(--eu-gold-bright);
+    background: transparent;
+}
+.btn-outline-warning:hover {
+    background: var(--eu-gold);
+    color: var(--eu-bg-deep);
+    border-color: var(--eu-gold);
+}
+.btn-dark-glass {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--eu-text);
+    border: 1px solid var(--eu-border);
+    backdrop-filter: blur(10px);
+}
+.btn-dark-glass:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--eu-text);
+}
+
+/* ---------- 5. HERO ---------- */
+.hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 6rem 0 4rem;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at top right, rgba(245, 185, 66, 0.18), transparent 50%),
+        radial-gradient(ellipse at bottom left, rgba(239, 68, 68, 0.10), transparent 50%),
+        linear-gradient(135deg, var(--eu-bg-deep) 0%, #14182a 100%);
+    z-index: 0;
+}
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px);
+    z-index: 0;
+    pointer-events: none;
+}
+.hero > .container { position: relative; z-index: 1; }
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: rgba(245, 185, 66, 0.12);
+    border: 1px solid rgba(245, 185, 66, 0.3);
+    border-radius: 100px;
+    font-size: 0.825rem;
+    color: var(--eu-gold-bright);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+.hero-badge .pulse-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--eu-gold-bright);
+    box-shadow: 0 0 0 0 rgba(245, 185, 66, 0.7);
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(245, 185, 66, 0.7); }
+    70%  { box-shadow: 0 0 0 12px rgba(245, 185, 66, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(245, 185, 66, 0); }
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+}
+.hero-title .highlight {
+    background: linear-gradient(135deg, var(--eu-gold-bright) 0%, var(--eu-gold-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
+}
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--eu-text-muted);
+    max-width: 540px;
+    margin-bottom: 2rem;
+}
+
+.hero-visual {
+    position: relative;
+    height: 100%;
+    min-height: 420px;
+}
+.hero-image-wrap {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--eu-shadow-lg);
+    border: 1px solid var(--eu-border);
+    aspect-ratio: 4/3;
+}
+.hero-image-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.hero-image-wrap:hover img { transform: scale(1.04); }
+
+.floating-card {
+    position: absolute;
+    background: rgba(26, 32, 48, 0.92);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--eu-border);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    box-shadow: var(--eu-shadow-lg);
+    animation: float 6s ease-in-out infinite;
+}
+.floating-card.card-1 { top: 8%; left: -6%; animation-delay: 0s; }
+.floating-card.card-2 { bottom: 12%; right: -5%; animation-delay: 1.5s; }
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+
+/* ---------- 6. Sections ---------- */
+.section {
+    padding: 6rem 0;
+    position: relative;
+}
+.section-eyebrow {
+    display: inline-block;
+    color: var(--eu-gold-bright);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.825rem;
+    margin-bottom: 1rem;
+}
+.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.15;
+}
+.section-subtitle {
+    color: var(--eu-text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+}
+
+/* ---------- 7. Cartes véhicules ---------- */
+.vehicle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+.vehicle-card {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.vehicle-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--eu-border-strong);
+    box-shadow: var(--eu-shadow-gold);
+}
+.vehicle-card-image {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1f2e, #232a3d);
+}
+.vehicle-card-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.vehicle-card:hover .vehicle-card-image img { transform: scale(1.08); }
+.vehicle-card-badge {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    background: rgba(10, 14, 21, 0.85);
+    backdrop-filter: blur(10px);
+    color: var(--eu-gold-bright);
+    border: 1px solid var(--eu-border-strong);
+    padding: 0.3rem 0.85rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+.vehicle-card-fav {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(10, 14, 21, 0.7);
+    color: white;
+    border: 1px solid var(--eu-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+.vehicle-card-fav:hover { background: var(--eu-accent); transform: scale(1.1); }
+
+.vehicle-card-body {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.vehicle-card-title {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: var(--eu-text);
+}
+.vehicle-card-sub {
+    color: var(--eu-text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+.vehicle-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+.vehicle-spec {
+    font-size: 0.78rem;
+    color: var(--eu-text-muted);
+    padding: 0.3rem 0.7rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+.vehicle-spec i { color: var(--eu-gold); }
+
+.vehicle-card-price {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--eu-gold-bright);
+    margin-bottom: 1rem;
+}
+.vehicle-card-foot {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+/* ---------- 8. Stats section ---------- */
+.stats-section {
+    background:
+        radial-gradient(ellipse at center, rgba(245, 185, 66, 0.06), transparent 70%),
+        var(--eu-bg-dark);
+    border-block: 1px solid var(--eu-border);
+}
+.stat-card {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+.stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--eu-gold-bright) 0%, var(--eu-gold-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+}
+.stat-label {
+    color: var(--eu-text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+}
+
+/* ---------- 9. Témoignages ---------- */
+.testimonial-card {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 16px;
+    padding: 2rem;
+    height: 100%;
+    position: relative;
+    transition: all 0.3s;
+}
+.testimonial-card:hover {
+    border-color: var(--eu-border-strong);
+    transform: translateY(-4px);
+}
+.testimonial-card .quote-mark {
+    position: absolute;
+    top: 1rem; right: 1.25rem;
+    font-size: 4rem;
+    line-height: 1;
+    color: rgba(245, 185, 66, 0.15);
+    font-family: var(--font-display);
+}
+.stars { color: var(--eu-gold); font-size: 1.1rem; }
+.stars .bi-star { color: rgba(255,255,255,0.15); }
+.testimonial-text {
+    color: var(--eu-text);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 1rem 0 1.25rem;
+}
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.author-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--eu-gold-bright), var(--eu-gold-deep));
+    color: var(--eu-bg-deep);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+.author-name { font-weight: 600; font-size: 0.9rem; }
+.author-role { color: var(--eu-text-muted); font-size: 0.8rem; }
+
+/* ---------- 10. Forms ---------- */
+.form-card {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 18px;
+    padding: 2.5rem;
+}
+.form-control, .form-select {
+    background: var(--eu-bg-elevated);
+    border: 1px solid var(--eu-border);
+    color: var(--eu-text);
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+.form-control::placeholder { color: var(--eu-text-dim); }
+.form-control:focus, .form-select:focus {
+    background: var(--eu-bg-elevated);
+    border-color: var(--eu-gold);
+    color: var(--eu-text);
+    box-shadow: 0 0 0 3px rgba(245, 185, 66, 0.18);
+}
+.form-label {
+    color: var(--eu-text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ---------- 11. Page detail véhicule ---------- */
+.detail-gallery {
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+}
+.detail-gallery img { width: 100%; height: 100%; object-fit: cover; }
+.detail-thumb {
+    aspect-ratio: 4/3;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+    background: var(--eu-bg-card);
+}
+.detail-thumb.active, .detail-thumb:hover { border-color: var(--eu-gold); }
+.detail-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.spec-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.spec-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--eu-border);
+}
+.spec-list li:last-child { border-bottom: none; }
+.spec-list .spec-label { color: var(--eu-text-muted); font-size: 0.9rem; }
+.spec-list .spec-value { color: var(--eu-text); font-weight: 600; }
+
+.detail-price {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--eu-gold-bright), var(--eu-gold-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ---------- 12. Footer ---------- */
+.euroauto-footer {
+    background: var(--eu-bg-dark);
+    border-top: 1px solid var(--eu-border);
+    margin-top: 4rem;
+}
+.euroauto-footer a { color: var(--eu-text-muted); }
+.euroauto-footer a:hover { color: var(--eu-gold-bright); }
+
+.social-link {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    border: 1px solid var(--eu-border);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--eu-text-muted);
+    transition: all 0.25s;
+}
+.social-link:hover {
+    background: var(--eu-gold);
+    color: var(--eu-bg-deep);
+    border-color: var(--eu-gold);
+    transform: translateY(-3px);
+}
+
+/* ---------- 13. Bouton retour en haut ---------- */
+.btn-back-top {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: none;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 8px 25px rgba(245, 185, 66, 0.4);
+}
+.btn-back-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ---------- 14. Page about ---------- */
+.about-image {
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    box-shadow: var(--eu-shadow-lg);
+    border: 1px solid var(--eu-border);
+}
+.about-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.value-card {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 16px;
+    padding: 2rem;
+    height: 100%;
+    transition: all 0.3s;
+}
+.value-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--eu-border-strong);
+}
+.value-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(245, 185, 66, 0.18), rgba(217, 119, 6, 0.12));
+    display: flex; align-items: center; justify-content: center;
+    color: var(--eu-gold-bright);
+    font-size: 1.6rem;
+    margin-bottom: 1.25rem;
+}
+.value-card h4 {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
+    color: var(--eu-text);
+}
+.value-card p {
+    color: var(--eu-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* ---------- 15. Page contact ---------- */
+.info-tile {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+}
+.info-tile:hover {
+    border-color: var(--eu-border-strong);
+    transform: translateY(-3px);
+}
+.info-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(245, 185, 66, 0.15);
+    color: var(--eu-gold-bright);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+/* ---------- 16. Filtres véhicules ---------- */
+.filter-bar {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+/* ---------- 17. Admin styles ---------- */
+.admin-wrapper {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    min-height: 100vh;
+}
+.admin-sidebar {
+    background: var(--eu-bg-dark);
+    border-right: 1px solid var(--eu-border);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+.admin-sidebar .nav-link {
+    color: var(--eu-text-muted);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-left: 3px solid transparent;
+    border-radius: 0;
+    font-size: 0.92rem;
+    transition: all 0.2s;
+}
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.active {
+    color: var(--eu-gold-bright);
+    background: rgba(245, 185, 66, 0.06);
+    border-left-color: var(--eu-gold);
+}
+.admin-main { padding: 2rem; max-width: 100%; overflow-x: hidden; }
+
+.admin-stat-card {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 14px;
+    padding: 1.5rem;
+}
+.admin-stat-card .stat-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: rgba(245, 185, 66, 0.15);
+    color: var(--eu-gold-bright);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+.admin-stat-card .stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--eu-text);
+}
+.admin-stat-card .stat-lab { color: var(--eu-text-muted); font-size: 0.85rem; }
+
+.admin-table {
+    background: var(--eu-bg-card);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--eu-border);
+}
+.admin-table table { color: var(--eu-text); margin: 0; }
+.admin-table thead th {
+    background: var(--eu-bg-elevated);
+    color: var(--eu-text-muted);
+    border-bottom: 1px solid var(--eu-border);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 1rem;
+}
+.admin-table tbody td {
+    border-color: var(--eu-border);
+    padding: 0.9rem 1rem;
+    vertical-align: middle;
+}
+.admin-table tbody tr:hover {
+    background: rgba(255,255,255,0.02);
+}
+
+.admin-login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse at top right, rgba(245, 185, 66, 0.15), transparent 50%),
+        var(--eu-bg-deep);
+    padding: 2rem;
+}
+.admin-login-card {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 20px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: var(--eu-shadow-lg);
+}
+
+/* ---------- 18. Responsive ---------- */
+@media (max-width: 991px) {
+    .admin-wrapper { grid-template-columns: 1fr; }
+    .admin-sidebar {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--eu-border);
+    }
+    .floating-card { display: none; }
+}
+@media (max-width: 768px) {
+    .section { padding: 4rem 0; }
+    .hero { padding: 4rem 0 3rem; min-height: auto; }
+    .form-card, .admin-login-card { padding: 1.75rem; }
+}
+
+/* ---------- 19. Utilitaires ---------- */
+.divider-glow {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--eu-gold), transparent);
+    margin: 4rem 0;
+    opacity: 0.5;
+}
+
+.text-gold { color: var(--eu-gold-bright) !important; }
+
+.bg-card { background: var(--eu-bg-card) !important; }
+
+.alert {
+    border-radius: 10px;
+    border: 1px solid transparent;
+}
+.alert-success { background: rgba(16, 185, 129, 0.12); color: #34d399; border-color: rgba(16, 185, 129, 0.25); }
+.alert-danger  { background: rgba(239, 68, 68, 0.12);  color: #f87171; border-color: rgba(239, 68, 68, 0.25); }
+.alert-warning { background: rgba(245, 185, 66, 0.12); color: #fcd34d; border-color: rgba(245, 185, 66, 0.25); }
+
+/* =====================================================================
+   COMPLÉMENTS — Vues catalogue, fiche véhicule, témoignages, admin
+   ===================================================================== */
+
+/* ---------- Page hero (sous-pages) ---------- */
+.page-hero {
+    position: relative;
+    padding: 7rem 0 4rem;
+    text-align: center;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(245, 185, 66, 0.08) 0%, transparent 50%),
+        var(--eu-bg);
+    border-bottom: 1px solid var(--eu-border);
+}
+.page-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    color: var(--eu-text);
+    line-height: 1.1;
+    margin: 1rem 0;
+}
+.page-hero-title .highlight {
+    background: linear-gradient(135deg, var(--eu-gold), var(--eu-gold-bright));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.page-hero-subtitle {
+    color: var(--eu-text-muted);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* ---------- Section générique avec véhicules en colonnes Bootstrap ---------- */
+.vehicles-section,
+.testimonials-section,
+.add-testimonial-section,
+.similar-section,
+.vehicle-detail,
+.filter-section {
+    padding: 4rem 0;
+}
+.filter-section { padding: 2rem 0; border-bottom: 1px solid var(--eu-border); }
+.breadcrumb-section {
+    padding: 1.2rem 0;
+    background: var(--eu-bg-elevated);
+    border-bottom: 1px solid var(--eu-border);
+}
+.breadcrumb {
+    margin: 0;
+    --bs-breadcrumb-divider-color: var(--eu-text-dim);
+    --bs-breadcrumb-item-active-color: var(--eu-gold-bright);
+}
+.breadcrumb a { color: var(--eu-text-muted); text-decoration: none; }
+.breadcrumb a:hover { color: var(--eu-gold-bright); }
+
+/* ---------- Carte véhicule (variante avec image-wrap) ---------- */
+.vehicle-card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+}
+.vehicle-image-wrap {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+}
+.vehicle-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.vehicle-card:hover .vehicle-image-wrap img { transform: scale(1.06); }
+.vehicle-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 0.35rem 0.85rem;
+    background: rgba(10, 14, 21, 0.85);
+    backdrop-filter: blur(10px);
+    color: var(--eu-gold-bright);
+    border: 1px solid var(--eu-gold);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.vehicle-body {
+    padding: 1.4rem;
+}
+.vehicle-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--eu-text);
+    margin: 0;
+}
+.vehicle-year {
+    color: var(--eu-gold-bright);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+.vehicle-body .vehicle-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin: 0.8rem 0 1rem;
+    font-size: 0.85rem;
+    color: var(--eu-text-muted);
+}
+.vehicle-body .vehicle-specs span { display: inline-flex; align-items: center; gap: 0.3rem; }
+.vehicle-body .vehicle-specs i { color: var(--eu-gold); }
+.vehicle-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--eu-border);
+}
+.vehicle-price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--eu-gold-bright);
+}
+.vehicle-cta {
+    color: var(--eu-text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+.vehicle-card:hover .vehicle-cta { color: var(--eu-gold-bright); }
+
+/* ---------- Filtres ---------- */
+.filter-bar {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 14px;
+    padding: 1.5rem;
+}
+
+/* ---------- Fiche véhicule ---------- */
+.vehicle-gallery .gallery-main {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--eu-border);
+}
+.vehicle-gallery .gallery-main img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+.gallery-badge {
+    top: 18px; left: 18px;
+    font-size: 0.85rem; padding: 0.5rem 1.1rem;
+}
+.vehicle-info { padding: 1rem 0; }
+.vehicle-detail-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+.vehicle-detail-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--eu-gold-bright);
+    margin-bottom: 1.5rem;
+}
+.spec-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+.spec-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 12px;
+    transition: border-color 0.3s ease;
+}
+.spec-item:hover { border-color: var(--eu-gold); }
+.spec-item i {
+    font-size: 1.4rem;
+    color: var(--eu-gold-bright);
+}
+.spec-item .spec-label {
+    font-size: 0.75rem;
+    color: var(--eu-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.spec-item .spec-value {
+    font-size: 1rem;
+    color: var(--eu-text);
+    font-weight: 700;
+}
+.trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--eu-border);
+    color: var(--eu-text-muted);
+    font-size: 0.85rem;
+}
+.description-card {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 14px;
+    padding: 2rem;
+}
+.lead-description {
+    color: var(--eu-text-muted);
+    line-height: 1.8;
+    margin: 0;
+}
+.similar-section {
+    background: var(--eu-bg-elevated);
+    border-top: 1px solid var(--eu-border);
+}
+
+/* ---------- Témoignages avancé ---------- */
+.average-rating {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1.2rem 2rem;
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-gold);
+    border-radius: 100px;
+}
+.big-stars {
+    color: var(--eu-gold-bright);
+    font-size: 1.6rem;
+    letter-spacing: 0.2rem;
+}
+.big-rating-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--eu-text);
+    margin: 0.3rem 0;
+}
+.big-rating-label {
+    color: var(--eu-text-muted);
+    font-size: 0.85rem;
+}
+.testimonial-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--eu-gold);
+    opacity: 0.4;
+    margin-bottom: -1.5rem;
+}
+.testimonial-stars {
+    color: var(--eu-gold-bright);
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.15rem;
+}
+.testimonial-stars .bi-star { color: rgba(255,255,255,0.18); }
+.author-date {
+    color: var(--eu-text-dim);
+    font-size: 0.75rem;
+}
+.add-testimonial-section { background: var(--eu-bg-elevated); }
+.form-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--eu-text);
+}
+.form-card-subtitle {
+    color: var(--eu-text-muted);
+    margin-bottom: 2rem;
+}
+
+/* ---------- Étoiles cliquables ---------- */
+.star-rating {
+    display: inline-flex;
+    gap: 0.5rem;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+}
+.star-rating i { transition: color 0.2s ease, transform 0.2s ease; }
+.star-rating i:hover { transform: scale(1.15); }
+.star-rating i.active { color: var(--eu-gold-bright); }
+
+/* ---------- État vide ---------- */
+.empty-state {
+    background: var(--eu-bg-card);
+    border: 1px dashed var(--eu-border);
+    border-radius: 16px;
+    padding: 3rem 1.5rem;
+}
+
+/* =====================================================================
+   ADMIN — Layout complet
+   ===================================================================== */
+.admin-body {
+    background: var(--eu-bg);
+    color: var(--eu-text);
+    min-height: 100vh;
+}
+.admin-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+}
+.admin-sidebar {
+    background: var(--eu-bg-card);
+    border-right: 1px solid var(--eu-border);
+    padding: 2rem 1rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--eu-text);
+    padding: 0 0.5rem 1.5rem;
+    border-bottom: 1px solid var(--eu-border);
+}
+.sidebar-brand i { font-size: 1.8rem; }
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--eu-border);
+}
+.user-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--eu-gold), var(--eu-gold-bright));
+    color: #0a0e15;
+    display: grid; place-items: center;
+    font-weight: 800;
+}
+.user-name { font-weight: 600; font-size: 0.9rem; }
+.user-role { font-size: 0.75rem; color: var(--eu-text-muted); }
+.sidebar-nav { display: flex; flex-direction: column; gap: 0.25rem; }
+.sidebar-nav .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.75rem 1rem;
+    color: var(--eu-text-muted);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+.sidebar-nav .nav-item i { font-size: 1.1rem; width: 20px; }
+.sidebar-nav .nav-item:hover {
+    background: var(--eu-bg-elevated);
+    color: var(--eu-text);
+}
+.sidebar-nav .nav-item.active {
+    background: linear-gradient(135deg, rgba(245, 185, 66, 0.15), rgba(251, 191, 36, 0.05));
+    color: var(--eu-gold-bright);
+    border-left: 3px solid var(--eu-gold);
+    padding-left: calc(1rem - 3px);
+}
+.sidebar-divider {
+    height: 1px;
+    background: var(--eu-border);
+    margin: 1rem 0;
+}
+.nav-logout:hover { color: #f87171 !important; }
+.admin-main {
+    background: var(--eu-bg);
+    overflow-x: hidden;
+}
+.admin-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: var(--eu-bg-card);
+    border-bottom: 1px solid var(--eu-border);
+}
+.topbar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--eu-text);
+    margin: 0;
+}
+.admin-content { padding: 2rem; }
+
+/* ---------- Cartes de stats admin ---------- */
+.admin-stat-card {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.admin-stat-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--eu-gold);
+}
+.admin-stat-card .stat-icon {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    display: grid; place-items: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+.stat-blue   .stat-icon { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+.stat-gold   .stat-icon { background: rgba(245, 185, 66, 0.15); color: var(--eu-gold-bright); }
+.stat-green  .stat-icon { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+.stat-purple .stat-icon { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+.admin-stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--eu-text);
+    line-height: 1;
+}
+.admin-stat-card .stat-unit { font-size: 1.2rem; }
+.admin-stat-card .stat-title {
+    color: var(--eu-text);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0.4rem 0 0.2rem;
+}
+.admin-stat-card .stat-meta {
+    color: var(--eu-text-muted);
+    font-size: 0.8rem;
+}
+
+/* ---------- Cartes admin & accès rapide ---------- */
+.admin-card {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 14px;
+    padding: 1.8rem;
+}
+.admin-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--eu-text);
+    margin-bottom: 1rem;
+}
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+.quick-action {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem;
+    background: var(--eu-bg-elevated);
+    border: 1px solid var(--eu-border);
+    border-radius: 10px;
+    color: var(--eu-text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.quick-action:hover {
+    background: rgba(245, 185, 66, 0.08);
+    border-color: var(--eu-gold);
+    color: var(--eu-gold-bright);
+    transform: translateY(-2px);
+}
+.quick-action i { font-size: 1.4rem; color: var(--eu-gold-bright); }
+
+/* ---------- Tableau admin ---------- */
+.admin-table {
+    width: 100%;
+    color: var(--eu-text);
+    border-collapse: collapse;
+}
+.admin-table thead th {
+    color: var(--eu-text-muted);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--eu-border);
+}
+.admin-table tbody td {
+    padding: 0.9rem 0.8rem;
+    border-bottom: 1px solid var(--eu-border);
+    vertical-align: middle;
+}
+.admin-table tbody tr:hover { background: var(--eu-bg-elevated); }
+.admin-table tbody tr.row-unread { background: rgba(245, 185, 66, 0.05); }
+.admin-thumb {
+    width: 64px; height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--eu-border);
+}
+
+/* ---------- Formulaires admin ---------- */
+.form-section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--eu-gold-bright);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--eu-border);
+    margin-bottom: 1.2rem;
+}
+
+/* ---------- Messages reçus ---------- */
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.message-item {
+    background: var(--eu-bg-elevated);
+    border: 1px solid var(--eu-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s ease;
+}
+.message-item.is-unread { border-left: 4px solid var(--eu-gold); }
+.message-item:hover { border-color: var(--eu-gold); }
+.message-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.message-sender { display: flex; gap: 0.8rem; align-items: center; }
+.message-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--eu-gold), var(--eu-gold-bright));
+    color: #0a0e15;
+    display: grid; place-items: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+.message-name { font-weight: 700; }
+.message-contact { font-size: 0.85rem; color: var(--eu-text-muted); }
+.message-contact a { color: var(--eu-text-muted); text-decoration: none; }
+.message-contact a:hover { color: var(--eu-gold-bright); }
+.message-subject {
+    padding: 0.6rem 0.9rem;
+    background: rgba(245, 185, 66, 0.08);
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+}
+.message-body {
+    color: var(--eu-text-muted);
+    line-height: 1.7;
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    white-space: pre-wrap;
+}
+.message-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--eu-border);
+}
+
+/* ---------- Modération témoignages ---------- */
+.moderation-card {
+    background: var(--eu-bg-elevated);
+    border: 1px solid var(--eu-border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    height: 100%;
+}
+.moderation-card.pending { border-left: 4px solid var(--eu-gold); }
+.moderation-message {
+    color: var(--eu-text-muted);
+    font-style: italic;
+    line-height: 1.6;
+    padding: 0.5rem 0;
+}
+
+/* ---------- Login admin ---------- */
+.admin-login-page {
+    background:
+        radial-gradient(circle at 20% 80%, rgba(245, 185, 66, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.08) 0%, transparent 50%),
+        var(--eu-bg);
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 2rem 1rem;
+    color: var(--eu-text);
+    font-family: 'Manrope', sans-serif;
+}
+.login-wrapper { width: 100%; max-width: 420px; }
+.login-card {
+    background: var(--eu-bg-card);
+    border: 1px solid var(--eu-border);
+    border-radius: 18px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+}
+.login-brand {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.login-brand i {
+    font-size: 3rem;
+    color: var(--eu-gold-bright);
+    display: block;
+    margin-bottom: 1rem;
+}
+.brand-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0;
+}
+.brand-subtitle {
+    color: var(--eu-text-muted);
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+}
+.form-floating > label { color: var(--eu-text-dim); }
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--eu-gold-bright);
+}
+
+/* ---------- Responsive admin ---------- */
+@media (max-width: 991px) {
+    .admin-layout { grid-template-columns: 1fr; }
+    .admin-sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--eu-border);
+    }
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow-x: auto;
+    }
+    .sidebar-nav .nav-item span { display: none; }
+    .sidebar-nav .nav-item { padding: 0.6rem 0.9rem; }
+    .sidebar-divider { display: none; }
+    .spec-grid { grid-template-columns: 1fr; }
+    .admin-content { padding: 1rem; }
+    .admin-topbar { padding: 1rem; }
+}
+
+@media (max-width: 575px) {
+    .vehicle-detail-price { font-size: 1.8rem; }
+    .quick-actions { grid-template-columns: 1fr; }
+    .filter-bar .row > * { margin-bottom: 0.5rem; }
+}
